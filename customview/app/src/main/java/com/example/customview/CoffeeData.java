@@ -1,14 +1,16 @@
 package com.example.customview;
 
-import android.widget.CheckBox;
+
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 public class CoffeeData {
 
     private String coffeee;
-    int coffeeImgId;
+    Drawable coffeeImgId;
 
 
-    public CoffeeData(String coffeee, int coffeeImgId) {
+    public CoffeeData(String coffeee, Drawable coffeeImgId) {
 
         this.coffeee = coffeee;
         this.coffeeImgId = coffeeImgId;
@@ -25,12 +27,12 @@ public class CoffeeData {
 
 
 
-    public int getCoffeeImgId(){
+    public Drawable getCoffeeImgId(){
 
         return coffeeImgId;
     }
 
-    public void setCoffeeImgId(int coffeeImgId){
+    public void setCoffeeImgId(Drawable coffeeImgId){
 
         this.coffeeImgId = coffeeImgId;
     }
