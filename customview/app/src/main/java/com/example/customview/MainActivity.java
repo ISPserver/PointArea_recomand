@@ -17,19 +17,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
 
 
 //File->setting-> Instant Run 종료하니 실행 됬음
@@ -45,9 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String strWord;
     InputStream is;
 
-    String[] result_arr;
-    String[] result_arr2;
-    ImageView logo;
+
 
     private void copyDatabase(File dbFile){
         try {
@@ -150,5 +141,4 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
         return bitmap;
     }
-
 }
