@@ -1,5 +1,6 @@
 package com.example.customview;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -32,11 +33,15 @@ public class googlemap extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_google_map);
         editText = (EditText) findViewById(R.id.editText);
         button=(Button)findViewById(R.id.button);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent intent = getIntent();
+        String point = intent.getExtras().getString("area_name");
+        String s =MainActivity.x;
+        editText.setText(s+" "+point);
     }
 
 
@@ -44,6 +49,7 @@ public class googlemap extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
         geocoder = new Geocoder(this);
+
 
         // 맵 터치 이벤트 구현 //
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
@@ -79,7 +85,6 @@ public class googlemap extends FragmentActivity implements OnMapReadyCallback {
                 catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 System.out.println(addressList.get(0).toString());
                 // 콤마를 기준으로 split
                 String []splitStr = addressList.get(0).toString().split(",");
@@ -105,10 +110,10 @@ public class googlemap extends FragmentActivity implements OnMapReadyCallback {
             }
         });
         ////////////////////
-
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        button.performClick();
     }
 }

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class CoffeeDataAdapter extends ArrayAdapter<CoffeeData> {
     ArrayList<CoffeeData> datas;
     Context context;
-
     public CoffeeDataAdapter(@NonNull Context context, int resource, ArrayList<CoffeeData>
             datas){
         super(context, resource);
@@ -57,13 +56,17 @@ public class CoffeeDataAdapter extends ArrayAdapter<CoffeeData> {
         ImageView coffeeImg = (ImageView) convertView.findViewById(R.id.coffee1_img);
         Button areaview = (Button)convertView.findViewById(R.id.area_view);
 
+
         ameriTitle.setText(datas.get(position).getCoffeee());
         coffeeImg.setImageDrawable(datas.get(position).getCoffeeImgId());
+        final String str =ameriTitle.getText().toString();
         areaview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context.getApplicationContext(), googlemap.class);
+                intent.putExtra("area_name", str );
                 context.startActivity(intent);
+
             }
         });
 

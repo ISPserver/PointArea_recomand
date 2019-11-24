@@ -9,10 +9,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     byte[] strMean;
     String strWord;
     InputStream is;
+    static String x;
 
     private void copyDatabase(File dbFile){
         try {
@@ -79,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         if(!dbFile.exists()) copyDatabase(dbFile);
         _instance = this;
             //sqlite part start
-            String x = "서울";
+            x = "서울";
+            String[] point = {"경복궁2","롯데타워2","잠실타워"};
+            int count = 0;
             Log.v("클릭",x + "");
             SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE,null);
             Cursor cursor = db.rawQuery(
@@ -87,22 +90,20 @@ public class MainActivity extends AppCompatActivity {
             if(cursor.getCount()>0){
 //                byte[] bytes = new byte[cursor.getCount()];
                 while (cursor.moveToNext()){
-                    strWord = cursor.getString(0);
+//                  strWord = cursor.getString(0);
                     strMean = cursor.getBlob(1);    //strMean type -> byte[]
 
                     Drawable draw = new BitmapDrawable(getResources(),getAppImage(strMean));
-                    coffees.add(new CoffeeData(strWord, draw));
+//                    coffees.add(new CoffeeData(strWord, draw));
+                    coffees.add(new CoffeeData(point[count], draw));
+                    count++;
                 }
-
+            cursor.close();
             }
             else {  }
 
             //sqlite part end
         listView = (ListView) findViewById(R.id.list_view1);
-
-        ImageView imageView = (ImageView)findViewById(R.id.coffee1_img);
-
-
 
         adapter = new CoffeeDataAdapter(this, 0, coffees);
         listView.setAdapter(adapter);
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder(); StrictMode.setVmPolicy(builder.build());
 
     }
 
