@@ -1,18 +1,17 @@
 package com.example.customview;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -56,9 +55,18 @@ public class CoffeeDataAdapter extends ArrayAdapter<CoffeeData> {
 
         TextView ameriTitle = (TextView) convertView.findViewById(R.id.ameri_title);
         ImageView coffeeImg = (ImageView) convertView.findViewById(R.id.coffee1_img);
+        Button areaview = (Button)convertView.findViewById(R.id.area_view);
 
         ameriTitle.setText(datas.get(position).getCoffeee());
         coffeeImg.setImageDrawable(datas.get(position).getCoffeeImgId());
+        areaview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context.getApplicationContext(), googlemap.class);
+                context.startActivity(intent);
+            }
+        });
+
 
         return convertView;
     }

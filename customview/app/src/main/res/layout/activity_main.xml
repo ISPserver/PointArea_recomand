@@ -25,13 +25,6 @@
         android:text="Next"
         android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/order_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="주문 금액" />
 
     <ListView
         android:id="@+id/list_view1"
