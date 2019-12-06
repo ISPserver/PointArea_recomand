@@ -80,25 +80,23 @@ public class MainActivity extends AppCompatActivity {
         if(!dbFile.exists()) copyDatabase(dbFile);
         _instance = this;
             //sqlite part start
-            x = "서울";
-            String[] point = {"경복궁2","롯데타워2","잠실타워"};
+            x = "강릉";
+            String[] point = {"경복궁","롯데타워","잠실타워","아리랑"};
             int count = 0;
             Log.v("클릭",x + "");
             SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE,null);
             Cursor cursor = db.rawQuery(
-                    "SELECT name,picture FROM Tb_PointArea WHERE ID = '"+ x +"';",new String[] {});
+                    "SELECT picture FROM Tb_PointArea WHERE ID = '"+ x +"';",new String[] {});
             if(cursor.getCount()>0){
 //                byte[] bytes = new byte[cursor.getCount()];
                 while (cursor.moveToNext()){
-//                  strWord = cursor.getString(0);
-                    strMean = cursor.getBlob(1);    //strMean type -> byte[]
-
+                    strMean = cursor.getBlob(0);    //strMean type -> byte[]
                     Drawable draw = new BitmapDrawable(getResources(),getAppImage(strMean));
 //                    coffees.add(new CoffeeData(strWord, draw));
                     coffees.add(new CoffeeData(point[count], draw));
                     count++;
                 }
-            cursor.close();
+                cursor.close();
             }
             else {  }
 
